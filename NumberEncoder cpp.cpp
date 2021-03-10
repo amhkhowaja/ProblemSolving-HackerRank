@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -16,8 +17,9 @@ string encode(int arr[],int n){
             }
         }
     }
+	//Encoding:
     for (int i=0;i<n;i++){
-        for(int i=0;i<arr[i];i++){
+        for(int j=0;j<arr[i];j++){
             encoded=encoded+to_string(1);
         }
         encoded=encoded+"-";
@@ -30,7 +32,6 @@ string decoder(string ones[], int n){
     //decoder 
     for (int i =0;i<n;i++){
         int x=ones[i].length();
-        
         numbers[i]=x;
     }
     //sorting
@@ -61,6 +62,7 @@ int main(){
     cout<<"2. Decoder"<<endl;
     int ch;
     cin>>ch;
+
     switch(ch)
     {
         case 1: 
@@ -68,7 +70,9 @@ int main(){
             cout<<"Enter the number of test cases: ";
             int number;
             cin>>number;
+			string* output=new string[number];
             int x=0;
+			cout<<"Input: "<<endl;
             for (int i=0; i<number;i++){
                 cin>>x;
                 int *arr=new int[x];
@@ -76,8 +80,13 @@ int main(){
                     cin>>arr[i];
                     //cout<<encode(arr,x);
                 }
-                cout<<encode(arr,x);
+                output[i]=encode(arr,x);
             }
+			cout<<"Output: "<<endl;
+			for (int i=0;i<number;i++){
+				cout<<output[i]<<endl;
+			}
+
         }
         break;
         case 2:
@@ -86,15 +95,21 @@ int main(){
             int number;
             cin>>number;
             int x=0;
-            for (int i=0; i<number;i++){
+			string* output=new string[number];
+            cout<<"Input: "<<endl;
+			for (int i=0; i<number;i++){
                 cin>>x;
                 string *arr=new string[x];
                 for(int i=0;i<x;i++){
                     cin>>arr[i];
                     //cout<<encode(arr,x);
                 }
-                cout<<decoder(arr,x)<<endl;
+                output[i]=decoder(arr,x);
             }
+			cout<<"Output: "<<endl;
+			for (int i=0;i<number;i++){
+				cout<<output[i]<<endl;
+			}
         }
         break;
         default:
