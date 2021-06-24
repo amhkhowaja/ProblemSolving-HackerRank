@@ -1,16 +1,19 @@
 bool has_cycle(SinglyLinkedListNode* head) {
     //Using Tortoise-Hare Algorithm:
     
-    SinglyLinkedListNode* tortoise=head; // it is slower
-    SinglyLinkedListNode* hare =head; //It is faster
+    SinglyLinkedListNode* tortoise=head; // it is slower(iterate by incrementing 1)
+    SinglyLinkedListNode* hare =head; //It is twice as faster as tortoise (iterate by incrementing 2 places)
+    
     do {
-        
         tortoise=tortoise->next;
-        hare=hare->next->next;
-        if (tortoise==NULL or hare ==NULL){
+        if (hare->next!=nullptr){    // if hare.next is null then null.next would give an error
+            hare=hare->next->next;
+        }
+        
+        if (hare ==nullptr or hare->next==nullptr){
             return false;
         }
-        if (tortoise ==hare ){
+        else if (tortoise ==hare ){
             return true;
         }
     }while(tortoise!=hare);
