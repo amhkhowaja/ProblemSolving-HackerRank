@@ -14,30 +14,24 @@ vector<string> split(const string &);
  *  1. INTEGER_ARRAY ranked
  *  2. INTEGER_ARRAY player
  */
-vector<int> ranker(vector<int> vex){
+ 
+int rank_teller(vector<int> vex, int number){
     vector<int> output;
     int rank=1;
-    output.push_back(rank);
     int length=vex.size();
-    for (int i =1;i<length;i++){
+    for (int i =0;i<length;i++){
+         
         if (vex[i]<vex[i-1]){
             rank++;
         }
-        
-        output.push_back(rank);
-    }
-    return output;
-} 
-int index_of_number(vector<int> vex, int number){
-    int index;
-    for (int i =0; i<vex.size();i++){
-        if (number==vex[i]){
-            index=i;
+        if (vex[i]==number){
             break;
         }
+        
     }
-    return index;
-}
+    return rank;
+} 
+
 vector<int> climbingLeaderboard(vector<int> ranked, vector<int> player) {
     vector<int> output;
     //We have to set the ranking for the ranked vector first ,
@@ -48,9 +42,8 @@ vector<int> climbingLeaderboard(vector<int> ranked, vector<int> player) {
         copy(ranked.begin(),ranked.end(), back_inserter(cop));
         cop.push_back(player[i]);
         sort(cop.begin(),cop.end(), greater<int>());
-        int index=index_of_number(cop,number);
-        vector<int> ranks=ranker(cop);
-        output.push_back(ranks[index]);
+        int rank=rank_teller(cop, number);
+        output.push_back(rank);
     }
     return output;
 }
